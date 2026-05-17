@@ -3,14 +3,7 @@ import NewsletterCTA from '@/components/layout/newsletter-cta';
 import { TrendingBar } from '@/components/news/trending-bar';
 import { ArticleGrid } from '@/components/news/article-grid';
 import { SectionHeader } from '@/components/shared/section-header';
-import { NicheCard } from '@/components/shared/niche-card';
-import { FeaturedArticle } from '@/components/news/featured-article';
-import { SearchBar } from '@/components/news/search-bar';
-import { AdBanner } from '@/components/shared/ad-banner';
-import { StatsCard } from '@/components/shared/stats-card';
-import { CTAButton } from '@/components/shared/cta-button';
 import { getPublishedArticles } from '@/lib/data';
-import { Zap, Shield, Home, Car, GraduationCap, Users, Building2, TrendingUp } from 'lucide-react';
 
 const trendingTopics = [
   { label: 'Load Shedding Solutions', count: 12 },
@@ -23,11 +16,11 @@ const trendingTopics = [
 ];
 
 const NICHES = [
-  { key: 'power' as const, icon: Zap, label: 'Power & Energy', color: 'bg-zulu-indigo', description: 'Solar power, inverters, and battery solutions' },
-  { key: 'security' as const, icon: Shield, label: 'Security', color: 'bg-zulu-red', description: 'Alarm systems, CCTV, and access control' },
-  { key: 'real_estate' as const, icon: Home, label: 'Real Estate', color: 'bg-zulu-gold', description: 'Property buying, selling, and rentals' },
-  { key: 'automotive' as const, icon: Car, label: 'Automotive', color: 'bg-zulu-indigo/90', description: 'Vehicle repairs and maintenance' },
-  { key: 'education' as const, icon: GraduationCap, label: 'Education', color: 'bg-zulu-red/90', description: 'Schools, tutoring, and online courses' },
+  { key: 'power', label: 'Power & Energy', color: 'bg-zulu-indigo', icon: '⚡', description: 'Solar power, inverters, and battery solutions' },
+  { key: 'security', label: 'Security', color: 'bg-zulu-red', icon: '🛡️', description: 'Alarm systems, CCTV, and access control' },
+  { key: 'real_estate', label: 'Real Estate', color: 'bg-zulu-gold', icon: '🏠', description: 'Property buying, selling, and rentals' },
+  { key: 'automotive', label: 'Automotive', color: 'bg-zulu-indigo/90', icon: '🚗', description: 'Vehicle repairs and maintenance' },
+  { key: 'education', label: 'Education', color: 'bg-zulu-red/90', icon: '🎓', description: 'Schools, tutoring, and online courses' },
 ];
 
 export default async function HomePage() {
@@ -44,60 +37,68 @@ export default async function HomePage() {
   return (
     <div>
       {/* HERO SECTION */}
-      <section className="relative bg-zulu-indigo text-zulu-gold py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 items-start">
+      <section className="relative bg-gradient-to-br from-zulu-indigo via-zulu-indigo/95 to-zulu-indigo text-zulu-gold py-16 md:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(244,183,64,0.08)_0%,_transparent_50%)]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 items-start">
             <div className="space-y-6">
-              {featuredArticle && (
+              {featuredArticle ? (
                 <>
                   <div className="flex items-center space-x-3 mb-2">
-                    <span className="bg-zulu-gold/20 text-zulu-gold px-3 py-1 rounded-full text-xs font-medium">
-                      {featuredArticle.category.charAt(0).toUpperCase() + featuredArticle.category.slice(1)}
+                    <span className="bg-zulu-gold/20 text-zulu-gold px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                      {featuredArticle.category}
                     </span>
-                    <span className="text-zulu-indigo/40 text-xs">{featuredArticle.readTime} min read</span>
+                    <span className="text-zulu-gold/50 text-xs">{featuredArticle.readTime} min read</span>
                   </div>
-                  <h1 className="text-4xl font-bold text-zulu-gold md:text-5xl lg:text-6xl">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zulu-gold leading-tight">
                     {featuredArticle.title}
                   </h1>
-                  <p className="text-zulu-indigo/50 text-lg max-w-2xl">
+                  <p className="text-zulu-gold/60 text-lg max-w-2xl leading-relaxed">
                     {featuredArticle.excerpt}
                   </p>
                   <div className="mt-6 flex items-center space-x-4">
-                    <Link href={`/news/${featuredArticle.category}/${featuredArticle.slug}`} className="inline-flex items-center px-4 py-2 bg-zulu-gold text-zulu-indigo font-medium rounded-md hover:bg-zulu-gold/90 transition-colors">
+                    <Link href={`/news/${featuredArticle.category}/${featuredArticle.slug}`} className="inline-flex items-center px-5 py-2.5 bg-zulu-gold text-zulu-indigo font-semibold rounded-lg hover:bg-zulu-gold/90 transition-all shadow-lg shadow-zulu-gold/20">
                       Read Full Story
                     </Link>
-                    <CTAButton variant="text" size="md">
+                    <Link href="/quotes" className="inline-flex items-center px-5 py-2.5 border border-zulu-gold/30 text-zulu-gold font-medium rounded-lg hover:bg-zulu-gold/10 transition-all">
                       Get Quotes
-                    </CTAButton>
+                    </Link>
                   </div>
                 </>
+              ) : (
+                <div className="space-y-4">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zulu-gold leading-tight">
+                    Africa's Autonomous Business Engine
+                  </h1>
+                  <p className="text-zulu-gold/60 text-lg">
+                    Connecting consumers with trusted service providers across the continent.
+                  </p>
+                </div>
               )}
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
+              <h3 className="text-xs font-semibold text-zulu-gold/40 uppercase tracking-wider mb-4">Latest Stories</h3>
               {sidebarArticles.map((article) => (
                 <Link
                   key={article.id}
                   href={`/news/${article.category}/${article.slug}`}
-                  className="group flex items-center space-x-4 p-4 bg-zulu-indigo/90 rounded-lg hover:bg-zulu-indigo/80 transition-colors"
+                  className="group flex items-center space-x-4 p-3 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all border border-white/5"
                 >
-                  <div className="flex-shrink-0 h-24 w-24 rounded-lg overflow-hidden">
+                  <div className="flex-shrink-0 h-16 w-16 rounded-lg overflow-hidden">
                     <img
                       src={article.featuredImage}
                       alt={article.title}
                       className="h-full w-full object-cover transition-transform group-hover:scale-105"
                     />
                   </div>
-                  <div className="flex-1 space-y-2">
-                    <div className="flex items-center space-x-2 mb-1">
-                      <span className="bg-zulu-gold/20 text-zulu-gold px-2 py-0.5 rounded-full text-xs font-medium">
-                        {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
-                      </span>
-                      <span className="text-zulu-indigo/40 text-xs">{article.readTime} min</span>
-                    </div>
-                    <h3 className="text-zulu-gold font-semibold text-lg group-hover:text-zulu-gold/80 transition-colors line-clamp-2">
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[10px] font-semibold text-zulu-gold/50 uppercase tracking-wider">
+                      {article.category}
+                    </span>
+                    <h4 className="text-zulu-gold text-sm font-medium group-hover:text-zulu-gold/80 transition-colors line-clamp-2 mt-0.5">
                       {article.title}
-                    </h3>
+                    </h4>
                   </div>
                 </Link>
               ))}
@@ -107,12 +108,12 @@ export default async function HomePage() {
       </section>
 
       {/* TRENDING NOW BAR */}
-      <section className="bg-zulu-indigo/90">
+      <section className="bg-zulu-indigo/95 border-y border-zulu-gold/5">
         <TrendingBar topics={trendingTopics} />
       </section>
 
       {/* LATEST NEWS GRID */}
-      <section className="py-12">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Latest News"
@@ -124,37 +125,37 @@ export default async function HomePage() {
           {gridArticles.length > 0 ? (
             <ArticleGrid articles={gridArticles} columns={3} showExcerpt showImage />
           ) : (
-            <div className="text-center py-12 text-zulu-indigo/50">No articles yet. Check back soon!</div>
+            <div className="text-center py-12 text-zinc-400">No articles yet. Check back soon!</div>
           )}
         </div>
       </section>
 
       {/* CATEGORY SECTIONS */}
-      <section className="py-12 bg-zulu-indigo/5">
+      <section className="py-16 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {energyArticles.length > 0 && (
-            <div className="mb-12">
+            <div className="mb-16">
               <SectionHeader eyebrow="Energy" title="Powering Africa's Future" description="Latest developments in renewable energy, power solutions, and electricity innovation" ctaText="Get Solar Quotes" ctaHref="/quotes/solar" />
               <ArticleGrid articles={energyArticles.slice(0, 3)} columns={3} showExcerpt showImage />
             </div>
           )}
 
           {securityArticles.length > 0 && (
-            <div className="mb-12">
+            <div className="mb-16">
               <SectionHeader eyebrow="Security" title="Keeping Africa Safe" description="Innovations in security technology, crime prevention, and safety solutions" ctaText="Get Security Quotes" ctaHref="/quotes/security" />
               <ArticleGrid articles={securityArticles.slice(0, 3)} columns={3} showExcerpt showImage />
             </div>
           )}
 
           {aiArticles.length > 0 && (
-            <div className="mb-12">
+            <div className="mb-16">
               <SectionHeader eyebrow="AI & Technology" title="The Intelligence Revolution" description="Artificial intelligence, machine learning, and tech innovations transforming African business" />
               <ArticleGrid articles={aiArticles.slice(0, 4)} columns={4} showExcerpt showImage />
             </div>
           )}
 
           {propertyArticles.length > 0 && (
-            <div className="mb-12">
+            <div className="mb-16">
               <SectionHeader eyebrow="Property" title="African Real Estate Insights" description="Property market trends, investment opportunities, and PropTech innovations" ctaText="Find an Agent" ctaHref="/quotes/property" />
               <ArticleGrid articles={propertyArticles.slice(0, 3)} columns={3} showExcerpt showImage />
             </div>
@@ -163,25 +164,26 @@ export default async function HomePage() {
       </section>
 
       {/* MARKETPLACE PROMO SECTION */}
-      <section className="py-16">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Marketplace"
             title="Find Trusted African Service Providers"
             description="Connect with verified businesses across all sectors for reliable quotes and services"
+            alignment="center"
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
             {NICHES.map((niche) => (
-              <div key={niche.key} className="bg-white rounded-xl p-6 border border-zulu-indigo/10 hover:border-zulu-gold/30 transition-colors">
-                <div className="flex h-12 w-12 items-center justify-center mb-4">
-                  <div className={`h-12 w-12 flex items-center justify-center rounded-full ${niche.color}`}>
-                    <niche.icon className="h-5 w-5 text-white" />
+              <div key={niche.key} className="group bg-white rounded-2xl p-6 border border-zinc-200 hover:border-zulu-gold/40 hover:shadow-xl hover:shadow-zulu-gold/5 transition-all duration-300">
+                <div className="flex h-14 w-14 items-center justify-center mb-5">
+                  <div className={`h-14 w-14 flex items-center justify-center rounded-2xl ${niche.color} text-2xl shadow-lg`}>
+                    {niche.icon}
                   </div>
                 </div>
-                <h3 className="text-zulu-indigo font-semibold mb-2">{niche.label}</h3>
-                <p className="text-zulu-indigo/60 text-sm mb-4">{niche.description}</p>
-                <Link href={`/quotes/${niche.key}`} className="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-zulu-gold text-zulu-indigo rounded-full hover:bg-zulu-gold/90 transition-colors">
-                  Get Quotes <span className="ml-2">→</span>
+                <h3 className="text-zulu-indigo font-bold text-lg mb-2">{niche.label}</h3>
+                <p className="text-zinc-500 text-sm mb-5 leading-relaxed">{niche.description}</p>
+                <Link href={`/quotes/${niche.key}`} className="inline-flex items-center text-sm font-semibold text-zulu-gold hover:text-zulu-gold/80 transition-colors">
+                  Get Quotes <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
               </div>
             ))}
@@ -190,13 +192,30 @@ export default async function HomePage() {
       </section>
 
       {/* STATS SECTION */}
-      <section className="py-12 bg-zulu-indigo text-zulu-gold">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-zulu-indigo relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(244,183,64,0.06)_0%,_transparent_50%)]" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-zulu-gold mb-3">Trusted by Thousands</h2>
+            <p className="text-zulu-gold/50 max-w-lg mx-auto">Powering business connections across Africa with AI-driven lead generation</p>
+          </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatsCard icon={Building2} value="6,850+" label="Businesses Served" />
-            <StatsCard icon={Users} value="45,200+" label="Leads Generated" />
-            <StatsCard icon={TrendingUp} value="240%" label="Average ROI" />
-            <StatsCard icon={Zap} value="R125M+" label="Revenue Facilitated" />
+            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+              <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">6,850+</p>
+              <p className="text-zulu-gold/50 text-sm">Businesses Served</p>
+            </div>
+            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+              <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">45,200+</p>
+              <p className="text-zulu-gold/50 text-sm">Leads Generated</p>
+            </div>
+            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+              <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">240%</p>
+              <p className="text-zulu-gold/50 text-sm">Average ROI</p>
+            </div>
+            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+              <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">R125M+</p>
+              <p className="text-zulu-gold/50 text-sm">Revenue Facilitated</p>
+            </div>
           </div>
         </div>
       </section>

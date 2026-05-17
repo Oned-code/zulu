@@ -3,176 +3,241 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
-
-  --radius: 0.5rem;
-}
-
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-
-  --primary: 210 40% 98%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
-}
-
-/* Custom ZuluFun colors */
-:root {
   --zulu-indigo: #1B1B3A;
   --zulu-gold: #F4B740;
   --zulu-red: #C41E3A;
 }
 
-.dark {
-  --zulu-indigo: #1B1B3A;
-  --zulu-gold: #F4B740;
-  --zulu-red: #C41E3A;
+* {
+  box-sizing: border-box;
 }
 
-/* African geometric pattern as subtle background */
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  background-image: var(--african-pattern);
-  background-size: 40px 40px;
-}
-
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background-color: #ffffff;
+  color: #1B1B3A;
+  line-height: 1.6;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-  border-radius: 4px;
+  background: #f1f1f1;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.3);
-  border-radius: 4px;
+  background: #c4c4c4;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.5);
+  background: #a0a0a0;
 }
 
-/* Selection colors */
+/* Selection */
 ::selection {
-  background-color: hsl(var(--zulu-indigo));
-  color: hsl(var(--foreground));
+  background-color: #F4B740;
+  color: #1B1B3A;
 }
 
 /* Focus ring */
 :focus-visible {
-  outline: 2px solid hsl(var(--ring));
+  outline: 2px solid #F4B740;
   outline-offset: 2px;
 }
 
-/* Utility classes for custom colors */
-.bg-zulu-indigo {
-  background-color: var(--zulu-indigo);
+/* Custom color utilities */
+.bg-zulu-indigo { background-color: var(--zulu-indigo); }
+.bg-zulu-gold { background-color: var(--zulu-gold); }
+.bg-zulu-red { background-color: var(--zulu-red); }
+.text-zulu-indigo { color: var(--zulu-indigo); }
+.text-zulu-gold { color: var(--zulu-gold); }
+.text-zulu-red { color: var(--zulu-red); }
+.border-zulu-indigo { border-color: var(--zulu-indigo); }
+.border-zulu-gold { border-color: var(--zulu-gold); }
+.border-zulu-red { border-color: var(--zulu-red); }
+
+/* Hover utilities */
+.hover\:bg-zulu-indigo\/90:hover { background-color: rgba(27, 27, 58, 0.9); }
+.hover\:bg-zulu-gold\/90:hover { background-color: rgba(244, 183, 64, 0.9); }
+.hover\:bg-zulu-red\/90:hover { background-color: rgba(196, 30, 58, 0.9); }
+
+/* Line clamp */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.bg-zulu-gold {
-  background-color: var(--zulu-gold);
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.bg-zulu-red {
-  background-color: var(--zulu-red);
+/* Prose styles for article content */
+.prose {
+  max-width: 65ch;
+  line-height: 1.8;
 }
 
-.text-zulu-indigo {
+.prose p {
+  margin-bottom: 1.25em;
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
   color: var(--zulu-indigo);
 }
 
-.text-zulu-gold {
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--zulu-gold);
+  padding-left: 1em;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: #666;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(27, 27, 58, 0.08);
+}
+
+/* Button base styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  background-color: var(--zulu-gold);
+  color: var(--zulu-indigo);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: rgba(244, 183, 64, 0.9);
+  box-shadow: 0 4px 12px rgba(244, 183, 64, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
   color: var(--zulu-gold);
+  border: 1px solid rgba(244, 183, 64, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-.text-zulu-red {
-  color: var(--zulu-red);
+.btn-secondary:hover {
+  background-color: rgba(244, 183, 64, 0.1);
 }
 
-.border-zulu-indigo {
-  border-color: var(--zulu-indigo);
+/* Input base styles */
+.input-base {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  color: var(--zulu-indigo);
+  transition: all 0.2s ease;
 }
 
-.border-zulu-gold {
+.input-base:focus {
+  outline: none;
   border-color: var(--zulu-gold);
+  box-shadow: 0 0 0 3px rgba(244, 183, 64, 0.1);
 }
 
-.border-zulu-red {
-  border-color: var(--zulu-red);
+.input-base::placeholder {
+  color: #9ca3af;
 }
 
-/* Hover effects */
-.hover\:bg-zulu-indigo\/90:hover {
-  background-color: hsla(var(--zulu-indigo), 0.9);
+/* Gradient backgrounds */
+.bg-gradient-indigo {
+  background: linear-gradient(135deg, #1B1B3A 0%, #2a2a5a 100%);
 }
 
-.hover\:bg-zulu-gold\/90:hover {
-  background-color: hsla(var(--zulu-gold), 0.9);
+.bg-gradient-gold {
+  background: linear-gradient(135deg, #F4B740 0%, #e0a530 100%);
 }
 
-.hover\:bg-zulu-red\/90:hover {
-  background-color: hsla(var(--zulu-red), 0.9);
+/* Section spacing */
+.section-padding {
+  padding: 4rem 0;
 }
 
-/* Dark mode adjustments for custom colors */
-.dark .bg-zulu-indigo {
-  background-color: var(--zulu-indigo);
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 0;
+  }
 }
