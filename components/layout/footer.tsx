@@ -4,26 +4,23 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Footer() {
-  const [email, setEmail] = useState('')
-  const [submitting, setSubmitting] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting(true)
-    // In a real app, you would send this to your backend
-    // For now, we'll just simulate
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    setSuccess(true)
-    setEmail('')
-    setSubmitting(false)
-  }
+    e.preventDefault();
+    setSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setSuccess(true);
+    setEmail('');
+    setSubmitting(false);
+  };
 
   return (
-    <footer className="bg-zulu-indigo text-zulu-indigo/50">
+    <footer className="bg-zulu-indigo text-zulu-gold/65">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Platform */}
           <div>
             <h3 className="text-zulu-gold font-semibold mb-4">Platform</h3>
             <ul className="space-y-2">
@@ -34,7 +31,6 @@ export default function Footer() {
               <li><Link href="/audit" className="hover:text-zulu-gold transition-colors">Audit Tool</Link></li>
             </ul>
           </div>
-          {/* Verticals */}
           <div>
             <h3 className="text-zulu-gold font-semibold mb-4">Verticals</h3>
             <ul className="space-y-2">
@@ -45,7 +41,6 @@ export default function Footer() {
               <li><Link href="/quotes/education" className="hover:text-zulu-gold transition-colors">Schools</Link></li>
             </ul>
           </div>
-          {/* Company */}
           <div>
             <h3 className="text-zulu-gold font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
@@ -56,7 +51,6 @@ export default function Footer() {
               <li><Link href="/press" className="hover:text-zulu-gold transition-colors">Press</Link></li>
             </ul>
           </div>
-          {/* Legal */}
           <div>
             <h3 className="text-zulu-gold font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
@@ -68,21 +62,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-zulu-indigo/80">
+        <div className="mt-12 pt-8 border-t border-zulu-gold/15">
           <div className="flex flex-col items-center gap-6">
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a href="#" className="text-zulu-indigo/70 hover:text-zulu-gold transition-colors text-lg">
-                in
-              </a>
-              <a href="#" className="text-zulu-indigo/70 hover:text-zulu-gold transition-colors text-lg">
-                X
-              </a>
-              <a href="#" className="text-zulu-indigo/70 hover:text-zulu-gold transition-colors text-lg">
-                ig
-              </a>
+              <a href="#" className="text-zulu-gold/65 hover:text-zulu-gold transition-colors text-lg">in</a>
+              <a href="#" className="text-zulu-gold/65 hover:text-zulu-gold transition-colors text-lg">X</a>
+              <a href="#" className="text-zulu-gold/65 hover:text-zulu-gold transition-colors text-lg">ig</a>
             </div>
-            <p className="text-center text-zulu-indigo/60 text-sm">
-              Proudly African — Powering Business Across the Continent
+            <p className="text-center text-zulu-gold/70 text-sm">
+              Proudly African - Powering Business Across the Continent
             </p>
             <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
               <form onSubmit={handleSubmit} className="flex items-center gap-2">
@@ -92,12 +80,12 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={submitting}
-                  className="px-3 py-2 rounded-md bg-zulu-indigo/80 border border-zulu-indigo/60 text-zulu-gold placeholder-zulu-indigo/40 focus:outline-none focus:ring-2 focus:ring-zulu-gold"
+                  className="px-3 py-2 rounded-md bg-white/10 border border-zulu-gold/25 text-white placeholder:text-zulu-gold/45 focus:outline-none focus:ring-2 focus:ring-zulu-gold"
                 />
                 <button
                   type="submit"
                   disabled={submitting || !email}
-                  className={`px-4 py-2 rounded-md font-medium transition-colors ${!email || submitting ? 'bg-zulu-indigo/80 cursor-not-allowed' : 'bg-zulu-gold text-zulu-indigo hover:bg-zulu-gold/90'}`}
+                  className={`px-4 py-2 rounded-md font-medium transition-colors ${!email || submitting ? 'bg-white/10 text-zulu-gold/45 cursor-not-allowed' : 'bg-zulu-gold text-zulu-indigo hover:bg-zulu-gold/90'}`}
                 >
                   {submitting ? 'Submitting...' : 'Subscribe'}
                 </button>
@@ -108,12 +96,12 @@ export default function Footer() {
                 </p>
               )}
             </div>
-            <p className="text-center text-zulu-indigo/40 text-xs">
-              &copy; {new Date().getFullYear()} ZuluFun.io. All rights reserved.
+            <p className="text-center text-zulu-gold/45 text-xs">
+              &copy; 2026 ZuluFun.io. All rights reserved.
             </p>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -22,7 +22,7 @@ export default function NewsletterCTA() {
         <h2 className="text-2xl font-bold mb-4">
           Get Africa&apos;s Smartest Business Newsletter
         </h2>
-        <p className="mb-6 text-zulu-indigo/50">
+        <p className="mb-6 text-zulu-gold/70">
           Join 25,000+ African business leaders who get exclusive insights,
           market trends, and AI-powered business strategies every week.
         </p>
@@ -35,13 +35,13 @@ export default function NewsletterCTA() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={submitting}
-                className="w-full px-4 py-3 rounded-md bg-zulu-indigo/80 border border-zulu-indigo/60 text-zulu-gold placeholder-zulu-indigo/40 focus:outline-none focus:ring-2 focus:ring-zulu-gold"
+                className="w-full px-4 py-3 rounded-md bg-white/10 border border-zulu-gold/30 text-white placeholder:text-zulu-gold/50 focus:outline-none focus:ring-2 focus:ring-zulu-gold"
               />
             </div>
             <button
               type="submit"
               disabled={submitting || !email}
-              className={`px-6 py-3 rounded-md font-medium transition-colors ${!email || submitting ? 'bg-zulu-indigo/80 cursor-not-allowed' : 'bg-zulu-gold text-zulu-indigo hover:bg-zulu-gold/90'}`}
+              className={`px-6 py-3 rounded-md font-medium transition-colors ${!email || submitting ? 'bg-white/10 text-zulu-gold/50 cursor-not-allowed' : 'bg-zulu-gold text-zulu-indigo hover:bg-zulu-gold/90'}`}
             >
               {submitting ? 'Submitting...' : 'Subscribe'}
             </button>
@@ -49,14 +49,14 @@ export default function NewsletterCTA() {
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-center">
-              <span className="h-8 w-8 flex items-center justify-center bg-zulu-gold text-zulu-indigo rounded-full font-bold">
-                ✓
+              <span className="h-8 w-8 flex items-center justify-center bg-zulu-gold text-zulu-indigo rounded-full text-xs font-bold">
+                OK
               </span>
             </div>
             <p className="font-medium">
               Thanks for subscribing! You&apos;re now part of the ZuluFun community.
             </p>
-            <p className="text-zulu-indigo/50 text-sm">
+            <p className="text-zulu-gold/60 text-sm">
               No spam, ever. Unsubscribe anytime.
             </p>
           </div>

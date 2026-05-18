@@ -1,7 +1,3 @@
-'use client';
-
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { ArticleGrid } from '@/components/news/article-grid';
 import { CategoryNav } from '@/components/news/category-nav';
 import { SearchBar } from '@/components/news/search-bar';
@@ -10,7 +6,6 @@ import { AdBanner } from '@/components/shared/ad-banner';
 import { SectionHeader } from '@/components/shared/section-header';
 import { TrendingBar } from '@/components/news/trending-bar';
 import { getPublishedArticles } from '@/lib/data';
-import type { Article } from '@/types/index';
 
 const trendingTopics = [
   { label: 'Load Shedding Solutions', count: 12 },
@@ -20,10 +15,13 @@ const trendingTopics = [
   { label: 'PropTech Trends', count: 7 },
 ];
 
-async function NewsPageInner() {
-  const searchParams = useSearchParams();
-  const category = searchParams.get('category') || 'all';
-  const search = searchParams.get('search') || '';
+export default async function NewsPage({
+  searchParams,
+}: {
+  searchParams?: { category?: string; search?: string; q?: string };
+}) {
+  const category = searchParams?.category || 'all';
+  const search = searchParams?.search || searchParams?.q || '';
 
   const allArticles = await getPublishedArticles();
 
@@ -80,13 +78,5 @@ async function NewsPageInner() {
         </div>
       </section>
     </div>
-  );
-}
-
-export default function NewsPage() {
-  return (
-    <Suspense fallback={<div className="py-12 text-center text-zulu-indigo/50">Loading news...</div>}>
-      <NewsPageInner />
-    </Suspense>
   );
 }

@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { Clock } from 'lucide-react';
 import type { Article } from '@/types/index';
@@ -24,7 +22,7 @@ export function ArticleGrid({ articles, columns = 3, showExcerpt = false, showIm
         <Link
           key={article.slug}
           href={`/news/${article.category}/${article.slug}`}
-          className="group bg-white dark:bg-zulu-indigo/90 rounded-xl border border-zulu-indigo/10 hover:border-zulu-gold/30 overflow-hidden transition-all duration-300 hover:shadow-lg"
+          className="group bg-white/95 rounded-3xl border border-zulu-indigo/10 hover:border-zulu-gold/30 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
         >
           {showImage && (
             <div className="aspect-video overflow-hidden">
@@ -56,7 +54,13 @@ export function ArticleGrid({ articles, columns = 3, showExcerpt = false, showIm
             )}
             <div className="flex items-center justify-between text-xs text-zulu-indigo/40">
               <span>{article.author}</span>
-              <span>{new Date(article.publishedAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'short' })}</span>
+              <span>
+                {new Intl.DateTimeFormat('en-ZA', {
+                  day: 'numeric',
+                  month: 'short',
+                  timeZone: 'UTC',
+                }).format(new Date(article.publishedAt))}
+              </span>
             </div>
           </div>
         </Link>

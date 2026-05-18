@@ -40,7 +40,14 @@ export function FeaturedArticle({ article }: FeaturedArticleProps) {
           <User className="h-3 w-3" />
           <span>{article.author}</span>
           <span>|</span>
-          <span>{new Date(article.publishedAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+          <span>
+            {new Intl.DateTimeFormat('en-ZA', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+              timeZone: 'UTC',
+            }).format(new Date(article.publishedAt))}
+          </span>
         </div>
       </div>
     </Link>

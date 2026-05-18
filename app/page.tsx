@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BatteryCharging, Car, GraduationCap, Home, ShieldCheck } from 'lucide-react';
 import NewsletterCTA from '@/components/layout/newsletter-cta';
 import { TrendingBar } from '@/components/news/trending-bar';
 import { ArticleGrid } from '@/components/news/article-grid';
@@ -16,12 +17,20 @@ const trendingTopics = [
 ];
 
 const NICHES = [
-  { key: 'power', label: 'Power & Energy', color: 'bg-zulu-indigo', icon: '⚡', description: 'Solar power, inverters, and battery solutions' },
-  { key: 'security', label: 'Security', color: 'bg-zulu-red', icon: '🛡️', description: 'Alarm systems, CCTV, and access control' },
-  { key: 'real_estate', label: 'Real Estate', color: 'bg-zulu-gold', icon: '🏠', description: 'Property buying, selling, and rentals' },
-  { key: 'automotive', label: 'Automotive', color: 'bg-zulu-indigo/90', icon: '🚗', description: 'Vehicle repairs and maintenance' },
-  { key: 'education', label: 'Education', color: 'bg-zulu-red/90', icon: '🎓', description: 'Schools, tutoring, and online courses' },
+  { key: 'power', label: 'Power & Energy', color: 'bg-zulu-indigo text-zulu-gold', description: 'Solar power, inverters, and battery solutions' },
+  { key: 'security', label: 'Security', color: 'bg-zulu-red text-white', description: 'Alarm systems, CCTV, and access control' },
+  { key: 'real_estate', label: 'Real Estate', color: 'bg-zulu-gold text-zulu-indigo', description: 'Property buying, selling, and rentals' },
+  { key: 'automotive', label: 'Automotive', color: 'bg-zulu-indigo/90 text-zulu-gold', description: 'Vehicle repairs and maintenance' },
+  { key: 'education', label: 'Education', color: 'bg-zulu-red/90 text-white', description: 'Schools, tutoring, and online courses' },
 ];
+
+const nicheIcons = {
+  power: BatteryCharging,
+  security: ShieldCheck,
+  real_estate: Home,
+  automotive: Car,
+  education: GraduationCap,
+};
 
 export default async function HomePage() {
   const allArticles = await getPublishedArticles();
@@ -173,20 +182,24 @@ export default async function HomePage() {
             alignment="center"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-            {NICHES.map((niche) => (
-              <div key={niche.key} className="group bg-white rounded-2xl p-6 border border-zinc-200 hover:border-zulu-gold/40 hover:shadow-xl hover:shadow-zulu-gold/5 transition-all duration-300">
+            {NICHES.map((niche) => {
+              const Icon = nicheIcons[niche.key as keyof typeof nicheIcons];
+
+              return (
+              <div key={niche.key} className="group bg-white rounded-lg p-6 border border-zinc-200 hover:border-zulu-gold/40 hover:shadow-xl hover:shadow-zulu-gold/5 transition-all duration-300">
                 <div className="flex h-14 w-14 items-center justify-center mb-5">
-                  <div className={`h-14 w-14 flex items-center justify-center rounded-2xl ${niche.color} text-2xl shadow-lg`}>
-                    {niche.icon}
+                  <div className={`h-14 w-14 flex items-center justify-center rounded-lg ${niche.color} shadow-lg`}>
+                    <Icon className="h-7 w-7" />
                   </div>
                 </div>
                 <h3 className="text-zulu-indigo font-bold text-lg mb-2">{niche.label}</h3>
                 <p className="text-zinc-500 text-sm mb-5 leading-relaxed">{niche.description}</p>
                 <Link href={`/quotes/${niche.key}`} className="inline-flex items-center text-sm font-semibold text-zulu-gold hover:text-zulu-gold/80 transition-colors">
-                  Get Quotes <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                  Get Quotes <span className="ml-1 group-hover:translate-x-1 transition-transform">-&gt;</span>
                 </Link>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

@@ -10,6 +10,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        zulu: {
+          indigo: '#1B1B3A',
+          gold: '#F4B740',
+          red: '#C41E3A',
+          ink: '#111827',
+          mist: '#F6F8FB',
+        },
         indigo: {
           50: '#eef2ff',
           100: '#e0e7ff',
