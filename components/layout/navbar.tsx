@@ -2,11 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Bell, Briefcase, Menu, Search, UserRound, X } from 'lucide-react';
-import { useState } from 'react';
+import { Bell, Briefcase, Menu, Search, UserRound, X, LogOut } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
 
 const navItems = [
   { label: 'AI', href: '/ai' },
+  { label: 'Crypto', href: '/crypto' },
   { label: 'Energy', href: '/energy' },
   { label: 'Security', href: '/security' },
   { label: 'Property', href: '/property' },
@@ -21,6 +23,25 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
+  const [user, setUser] = useState<any>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [supabase]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +50,12 @@ export default function Navbar() {
     setSearchOpen(false);
     setMenuOpen(false);
     router.push(`/news?search=${encodeURIComponent(trimmed)}`);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setProfileOpen(false);
+    router.push('/auth/login');
   };
 
   return (
@@ -46,7 +73,7 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 overflow-x-auto">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
@@ -78,18 +105,43 @@ export default function Navbar() {
             <Link href="/quotes" className="rounded-md bg-zulu-gold px-4 py-2 text-sm font-semibold text-zulu-indigo transition-colors hover:bg-zulu-gold/90">
               Get Quotes
             </Link>
-            <button
-              type="button"
-              className="relative rounded-md p-2 text-zulu-gold/80 transition-colors hover:bg-white/10 hover:text-zulu-gold"
-              aria-label="Notifications"
-            >
-              <Bell className="h-5 w-5" />
-              <span className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full bg-zulu-red ring-2 ring-zulu-indigo" />
-            </button>
-            <Link href="/dashboard" className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-zulu-gold/75 transition-colors hover:bg-white/10 hover:text-zulu-gold">
-              <UserRound className="h-4 w-4" />
-              Dashboard
-            </Link>
+            
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="flex items-center justify-center h-8 w-8 rounded-full bg-white/10 border border-zulu-gold/30 hover:border-zulu-gold transition-colors ml-2"
+                >
+                  <UserRound className="h-4 w-4 text-zulu-gold" />
+                </button>
+
+                {profileOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-zinc-200">
+                    <div className="px-4 py-2 border-b border-zinc-100">
+                      <p className="text-sm font-medium text-zinc-900 truncate">{user.email}</p>
+                    </div>
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setProfileOpen(false)}
+                      className="block px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-50"
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" /> Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link href="/auth/login" className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-zulu-gold/75 transition-colors hover:bg-white/10 hover:text-zulu-gold ml-2 border border-zulu-gold/30">
+                <UserRound className="h-4 w-4" />
+                Sign In
+              </Link>
+            )}
           </div>
 
           <button
@@ -151,9 +203,15 @@ export default function Navbar() {
             <Link href="/quotes" onClick={() => setMenuOpen(false)} className="rounded-md bg-zulu-gold px-4 py-2 text-center text-sm font-semibold text-zulu-indigo">
               Get Quotes
             </Link>
-            <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="rounded-md border border-zulu-gold/25 px-4 py-2 text-center text-sm font-semibold text-zulu-gold">
-              Dashboard
-            </Link>
+            {user ? (
+              <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="rounded-md border border-zulu-gold/25 px-4 py-2 text-center text-sm font-semibold text-zulu-gold">
+                Dashboard
+              </Link>
+            ) : (
+              <Link href="/auth/login" onClick={() => setMenuOpen(false)} className="rounded-md border border-zulu-gold/25 px-4 py-2 text-center text-sm font-semibold text-zulu-gold">
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       )}
