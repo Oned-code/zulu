@@ -59,7 +59,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-zulu-gold/15 bg-zulu-indigo/95 text-zulu-gold shadow-lg shadow-zulu-indigo/10 backdrop-blur">
+    <nav className="sticky top-0 z-50 border-b border-white/10 bg-zulu-indigo/80 text-zulu-gold shadow-lg shadow-zulu-indigo/15 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="flex min-w-0 items-center gap-3">

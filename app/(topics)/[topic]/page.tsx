@@ -174,7 +174,7 @@ export default async function TopicPage({ params }: { params: { topic: string } 
         {/* Feature Cards for AI (legacy support to keep design nice) */}
         {topicKey === 'ai' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-            <div className="bg-white p-8 rounded-3xl border border-zinc-200 shadow-sm flex items-start space-x-4">
+            <div className="bg-white/70 backdrop-blur-md p-8 rounded-3xl border border-zinc-200/60 shadow-sm hover:shadow-[0_20px_50px_rgba(27,27,58,0.04)] hover:bg-white hover:-translate-y-1 transition-all duration-300 flex items-start space-x-4">
               <div className="bg-zulu-indigo/10 p-3 rounded-xl">
                 <Sparkles className="w-6 h-6 text-zulu-indigo" />
               </div>
@@ -183,7 +183,7 @@ export default async function TopicPage({ params }: { params: { topic: string } 
                 <p className="text-zinc-600 leading-relaxed">Discover how local businesses are leveraging AI to reduce operational costs and scale faster than ever before.</p>
               </div>
             </div>
-            <div className="bg-white p-8 rounded-3xl border border-zinc-200 shadow-sm flex items-start space-x-4">
+            <div className="bg-white/70 backdrop-blur-md p-8 rounded-3xl border border-zinc-200/60 shadow-sm hover:shadow-[0_20px_50px_rgba(27,27,58,0.04)] hover:bg-white hover:-translate-y-1 transition-all duration-300 flex items-start space-x-4">
               <div className="bg-zulu-gold/20 p-3 rounded-xl">
                 <BrainCircuit className="w-6 h-6 text-zulu-gold" />
               </div>

@@ -186,16 +186,16 @@ export default async function HomePage() {
               const Icon = nicheIcons[niche.key as keyof typeof nicheIcons];
 
               return (
-              <div key={niche.key} className="group bg-white rounded-lg p-6 border border-zinc-200 hover:border-zulu-gold/40 hover:shadow-xl hover:shadow-zulu-gold/5 transition-all duration-300">
-                <div className="flex h-14 w-14 items-center justify-center mb-5">
-                  <div className={`h-14 w-14 flex items-center justify-center rounded-lg ${niche.color} shadow-lg`}>
+              <div key={niche.key} className="group bg-white/70 backdrop-blur-md rounded-2xl p-8 border border-zinc-200/60 hover:border-zulu-gold/40 hover:bg-white hover:shadow-[0_20px_50px_rgba(27,27,58,0.06)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
+                <div className="flex h-14 w-14 items-center justify-center mb-6">
+                  <div className={`h-14 w-14 flex items-center justify-center rounded-xl ${niche.color} shadow-lg shadow-zulu-indigo/10 transform group-hover:scale-110 transition-transform duration-300`}>
                     <Icon className="h-7 w-7" />
                   </div>
                 </div>
-                <h3 className="text-zulu-indigo font-bold text-lg mb-2">{niche.label}</h3>
-                <p className="text-zinc-500 text-sm mb-5 leading-relaxed">{niche.description}</p>
-                <Link href={`/quotes/${niche.key}`} className="inline-flex items-center text-sm font-semibold text-zulu-gold hover:text-zulu-gold/80 transition-colors">
-                  Get Quotes <span className="ml-1 group-hover:translate-x-1 transition-transform">-&gt;</span>
+                <h3 className="text-zulu-indigo font-bold text-xl mb-3">{niche.label}</h3>
+                <p className="text-zinc-500 text-sm mb-6 leading-relaxed">{niche.description}</p>
+                <Link href={`/quotes/${niche.key}`} className="inline-flex items-center text-sm font-bold text-zulu-indigo/80 hover:text-zulu-indigo transition-colors w-fit">
+                  Get Quotes <span className="ml-1 group-hover:translate-x-1.5 transition-transform duration-300">-&gt;</span>
                 </Link>
               </div>
               );
@@ -213,19 +213,19 @@ export default async function HomePage() {
             <p className="text-zulu-gold/50 max-w-lg mx-auto">Powering business connections across Africa with AI-driven lead generation</p>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+            <div className="text-center p-8 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1">
               <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">6,850+</p>
               <p className="text-zulu-gold/50 text-sm">Businesses Served</p>
             </div>
-            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+            <div className="text-center p-8 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1">
               <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">45,200+</p>
               <p className="text-zulu-gold/50 text-sm">Leads Generated</p>
             </div>
-            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+            <div className="text-center p-8 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1">
               <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">240%</p>
               <p className="text-zulu-gold/50 text-sm">Average ROI</p>
             </div>
-            <div className="text-center p-6 bg-white/5 rounded-2xl border border-white/5">
+            <div className="text-center p-8 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1">
               <p className="text-3xl md:text-4xl font-bold text-zulu-gold mb-1">R125M+</p>
               <p className="text-zulu-gold/50 text-sm">Revenue Facilitated</p>
             </div>

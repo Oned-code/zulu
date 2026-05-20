@@ -107,9 +107,9 @@ export default function B2BMarketplacePage() {
               const Icon = niche.icon;
               return (
                 <Link href={`/b2b/${niche.key}`} key={niche.key} className="group">
-                  <div className="bg-white p-8 rounded-2xl border border-zinc-200 hover:border-zulu-gold shadow-sm hover:shadow-xl transition-all duration-300">
+                  <div className="bg-white/70 backdrop-blur-md p-8 rounded-2xl border border-zinc-200/60 hover:border-zulu-gold/40 hover:bg-white hover:shadow-[0_20px_50px_rgba(27,27,58,0.06)] transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
                     <div className="flex justify-between items-start mb-6">
-                      <div className="w-14 h-14 bg-zinc-50 rounded-xl flex items-center justify-center text-zulu-indigo group-hover:bg-zulu-indigo group-hover:text-zulu-gold transition-colors">
+                      <div className="w-14 h-14 bg-zinc-100/50 rounded-xl flex items-center justify-center text-zulu-indigo group-hover:bg-zulu-indigo group-hover:text-zulu-gold group-hover:scale-110 transition-all duration-300 shadow-sm">
                         <Icon className="w-7 h-7" />
                       </div>
                       <div className="text-right">
