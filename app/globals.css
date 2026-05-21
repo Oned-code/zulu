@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --zulu-indigo: #1B1B3A;
+  --zulu-indigo: #000000;
   --zulu-gold: #ecf6fd;
   --zulu-red: #C41E3A;
 }
@@ -23,8 +23,8 @@ body {
   padding: 0;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
-  background-color: #ffffff;
-  color: #1B1B3A;
+  background-color: #f9f9f9;
+  color: #000000;
   line-height: 1.6;
   background-attachment: fixed;
 }
@@ -60,8 +60,8 @@ a:hover {
 
 /* Selection */
 ::selection {
-  background-color: #F4B740;
-  color: #1B1B3A;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 /* Focus ring */
@@ -82,7 +82,7 @@ a:hover {
 .border-zulu-red { border-color: var(--zulu-red); }
 
 /* Hover utilities */
-.hover\:bg-zulu-indigo\/90:hover { background-color: rgba(27, 27, 58, 0.9); }
+.hover\:bg-zulu-indigo\/90:hover { background-color: rgba(0, 0, 0, 0.9); }
 .hover\:bg-zulu-gold\/90:hover { background-color: rgba(244, 183, 64, 0.9); }
 .hover\:bg-zulu-red\/90:hover { background-color: rgba(196, 30, 58, 0.9); }
 
@@ -163,7 +163,7 @@ a:hover {
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(27, 27, 58, 0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* Button base styles */
@@ -216,7 +216,7 @@ a:hover {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 18px 45px rgba(27, 27, 58, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
 }
 
 .glow-panel {
@@ -258,7 +258,7 @@ a:hover {
 
 /* Gradient backgrounds */
 .bg-gradient-indigo {
-  background: linear-gradient(135deg, #1B1B3A 0%, #2a2a5a 100%);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
 }
 
 .bg-gradient-gold {

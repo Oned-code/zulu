@@ -36,7 +36,7 @@ export default async function HomePage() {
   const allArticles = await getPublishedArticles();
   const featuredArticle = allArticles[0];
   const sidebarArticles = allArticles.slice(1, 3);
-  const gridArticles = allArticles.slice(0, 5);
+  const gridArticles = allArticles.slice(3, 7);
   const energyArticles = allArticles.filter((a) => a.category === 'energy');
   const securityArticles = allArticles.filter((a) => a.category === 'security');
   const propertyArticles = allArticles.filter((a) => a.category === 'property');
@@ -46,40 +46,40 @@ export default async function HomePage() {
   return (
     <div>
       {/* HERO SECTION */}
-      <section className="relative bg-gradient-to-br from-zulu-indigo via-zulu-indigo/95 to-zulu-indigo text-zulu-gold py-16 md:py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(244,183,64,0.08)_0%,_transparent_50%)]" />
+      <section className="relative bg-transparent text-zulu-indigo py-16 md:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,0,0,0.02)_0%,_transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 items-start">
             <div className="space-y-6">
               {featuredArticle ? (
                 <>
                   <div className="flex items-center space-x-3 mb-2">
-                    <span className="bg-zulu-gold/20 text-zulu-gold px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                    <span className="bg-black/5 text-zinc-500 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                       {featuredArticle.category}
                     </span>
-                    <span className="text-zulu-gold/50 text-xs">{featuredArticle.readTime} min read</span>
+                    <span className="text-zinc-400 text-xs font-medium">{featuredArticle.readTime} min read</span>
                   </div>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zulu-gold leading-tight">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zulu-indigo leading-tight">
                     {featuredArticle.title}
                   </h1>
-                  <p className="text-zulu-gold/60 text-lg max-w-2xl leading-relaxed">
+                  <p className="text-zulu-indigo/60 text-lg max-w-2xl leading-relaxed">
                     {featuredArticle.excerpt}
                   </p>
                   <div className="mt-6 flex items-center space-x-4">
-                    <Link href={`/news/${featuredArticle.category}/${featuredArticle.slug}`} className="inline-flex items-center px-5 py-2.5 bg-zulu-gold text-zulu-indigo font-semibold rounded-lg hover:bg-zulu-gold/90 transition-all shadow-lg shadow-zulu-gold/20">
+                    <Link href={`/news/${featuredArticle.category}/${featuredArticle.slug}`} className="inline-flex items-center px-5 py-2.5 bg-black text-white font-semibold rounded-lg hover:bg-zinc-800 transition-all shadow-md shadow-black/10">
                       Read Full Story
                     </Link>
-                    <Link href="/quotes" className="inline-flex items-center px-5 py-2.5 border border-zulu-gold/30 text-zulu-gold font-medium rounded-lg hover:bg-zulu-gold/10 transition-all">
+                    <Link href="/quotes" className="inline-flex items-center px-5 py-2.5 border border-black/20 text-black font-semibold rounded-lg hover:bg-black/5 transition-all">
                       Get Quotes
                     </Link>
                   </div>
                 </>
               ) : (
                 <div className="space-y-4">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zulu-gold leading-tight">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zulu-indigo leading-tight">
                     Africa's Autonomous Business Engine
                   </h1>
-                  <p className="text-zulu-gold/60 text-lg">
+                  <p className="text-zulu-indigo/60 text-lg">
                     Connecting consumers with trusted service providers across the continent.
                   </p>
                 </div>
@@ -87,12 +87,12 @@ export default async function HomePage() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold text-zulu-gold/40 uppercase tracking-wider mb-4">Latest Stories</h3>
+              <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4">Latest Stories</h3>
               {sidebarArticles.map((article) => (
                 <Link
                   key={article.id}
                   href={`/news/${article.category}/${article.slug}`}
-                  className="group flex items-center space-x-4 p-3 bg-white/5 backdrop-blur-sm rounded-xl hover:bg-white/10 transition-all border border-white/5"
+                  className="group flex items-center space-x-4 p-3 bg-white rounded-2xl border border-zinc-200/50 hover:border-zinc-300 hover:shadow-md transition-all duration-300"
                 >
                   <div className="flex-shrink-0 h-16 w-16 rounded-lg overflow-hidden">
                     <img
@@ -102,10 +102,10 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-[10px] font-semibold text-zulu-gold/50 uppercase tracking-wider">
+                    <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
                       {article.category}
                     </span>
-                    <h4 className="text-zulu-gold text-sm font-medium group-hover:text-zulu-gold/80 transition-colors line-clamp-2 mt-0.5">
+                    <h4 className="text-zulu-indigo text-sm font-semibold group-hover:text-zinc-600 transition-colors line-clamp-2 mt-0.5">
                       {article.title}
                     </h4>
                   </div>
@@ -132,7 +132,7 @@ export default async function HomePage() {
             ctaHref="/news"
           />
           {gridArticles.length > 0 ? (
-            <ArticleGrid articles={gridArticles} columns={3} showExcerpt showImage />
+            <ArticleGrid articles={gridArticles} columns={4} showExcerpt showImage />
           ) : (
             <div className="text-center py-12 text-zinc-400">No articles yet. Check back soon!</div>
           )}
@@ -145,14 +145,14 @@ export default async function HomePage() {
           {energyArticles.length > 0 && (
             <div className="mb-16">
               <SectionHeader eyebrow="Energy" title="Powering Africa's Future" description="Latest developments in renewable energy, power solutions, and electricity innovation" ctaText="Get Solar Quotes" ctaHref="/quotes/solar" />
-              <ArticleGrid articles={energyArticles.slice(0, 3)} columns={3} showExcerpt showImage />
+              <ArticleGrid articles={energyArticles.slice(0, 4)} columns={4} showExcerpt showImage />
             </div>
           )}
 
           {securityArticles.length > 0 && (
             <div className="mb-16">
               <SectionHeader eyebrow="Security" title="Keeping Africa Safe" description="Innovations in security technology, crime prevention, and safety solutions" ctaText="Get Security Quotes" ctaHref="/quotes/security" />
-              <ArticleGrid articles={securityArticles.slice(0, 3)} columns={3} showExcerpt showImage />
+              <ArticleGrid articles={securityArticles.slice(0, 4)} columns={4} showExcerpt showImage />
             </div>
           )}
 
@@ -166,7 +166,7 @@ export default async function HomePage() {
           {propertyArticles.length > 0 && (
             <div className="mb-16">
               <SectionHeader eyebrow="Property" title="African Real Estate Insights" description="Property market trends, investment opportunities, and PropTech innovations" ctaText="Find an Agent" ctaHref="/quotes/property" />
-              <ArticleGrid articles={propertyArticles.slice(0, 3)} columns={3} showExcerpt showImage />
+              <ArticleGrid articles={propertyArticles.slice(0, 4)} columns={4} showExcerpt showImage />
             </div>
           )}
         </div>

@@ -23,7 +23,7 @@ export function SectionHeader({
     <div className={`mb-10 ${className}`}>
       <div className={`flex flex-col ${alignment === 'center' ? 'items-center text-center' : 'items-start'} space-y-3`}>
         {eyebrow && (
-          <span className="text-zulu-gold font-semibold text-xs tracking-wider uppercase">
+          <span className="text-zinc-500 font-bold text-xs tracking-wider uppercase">
             {eyebrow}
           </span>
         )}
@@ -38,7 +38,7 @@ export function SectionHeader({
         {ctaText && ctaHref && (
           <Link
             href={ctaHref}
-            className="inline-flex items-center px-5 py-3 bg-zulu-gold text-zulu-indigo font-semibold rounded-full hover:bg-zulu-gold/90 transition-colors text-sm shadow-md shadow-zulu-gold/10 mt-2"
+            className="inline-flex items-center px-5 py-2.5 bg-black text-white hover:bg-zinc-800 transition-colors text-sm font-semibold rounded-lg mt-2"
           >
             {ctaText}
           </Link>

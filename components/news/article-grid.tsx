@@ -22,7 +22,7 @@ export function ArticleGrid({ articles, columns = 3, showExcerpt = false, showIm
         <Link
           key={article.slug}
           href={`/news/${article.category}/${article.slug}`}
-          className="group bg-white/95 rounded-3xl border border-zulu-indigo/10 hover:border-zulu-gold/30 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+          className="group bg-white rounded-3xl border border-zinc-200/60 hover:border-zinc-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
         >
           {showImage && (
             <div className="aspect-video overflow-hidden">
@@ -35,7 +35,7 @@ export function ArticleGrid({ articles, columns = 3, showExcerpt = false, showIm
           )}
           <div className="p-5 space-y-3">
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-medium text-zulu-gold uppercase tracking-wider">
+              <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
                 {article.category}
               </span>
               <span className="text-zulu-indigo/30">-</span>
@@ -44,7 +44,7 @@ export function ArticleGrid({ articles, columns = 3, showExcerpt = false, showIm
                 {article.readTime} min
               </span>
             </div>
-            <h3 className="text-zulu-indigo font-semibold group-hover:text-zulu-gold transition-colors line-clamp-2">
+            <h3 className="text-zulu-indigo font-semibold group-hover:text-zinc-600 transition-colors line-clamp-2">
               {article.title}
             </h3>
             {showExcerpt && (

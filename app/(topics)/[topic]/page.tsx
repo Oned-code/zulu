@@ -129,18 +129,17 @@ export default async function TopicPage({ params }: { params: { topic: string } 
   const targetQuoteRoute = quoteNicheMap[topicKey] || '';
 
   return (
-    <div className="min-h-screen bg-zinc-50 pt-24 pb-16">
+    <div className="min-h-screen bg-transparent pt-24 pb-16">
       {/* Hero Section */}
-      <section className="bg-zinc-900 text-white py-20 relative overflow-hidden mb-16">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
+      <section className="bg-transparent text-zulu-indigo py-16 relative overflow-hidden mb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className={`w-20 h-20 ${config.bg} rounded-3xl flex items-center justify-center mx-auto mb-8 border ${config.borderColor} ${config.shadow}`}>
-            <Icon className={`w-10 h-10 ${config.color}`} />
+          <div className={`w-20 h-20 bg-black/5 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-zinc-200`}>
+            <Icon className={`w-10 h-10 text-black`} />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black">
             {config.title}
           </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-xl text-zinc-500 max-w-2xl mx-auto">
             {config.description}
           </p>
         </div>
@@ -202,7 +201,7 @@ export default async function TopicPage({ params }: { params: { topic: string } 
         />
         
         {topicArticles.length > 0 ? (
-          <ArticleGrid articles={topicArticles} columns={3} showExcerpt showImage />
+          <ArticleGrid articles={topicArticles} columns={4} showExcerpt showImage />
         ) : (
           <div className="text-center py-20 bg-white rounded-3xl border border-zinc-200">
             <p className="text-zinc-500">Our ContentAI agent is currently gathering the latest insights for this topic. Check back soon.</p>
