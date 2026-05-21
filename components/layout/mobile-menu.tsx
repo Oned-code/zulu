@@ -32,7 +32,7 @@ export default function MobileMenu() {
       <div className="flex h-16 items-center justify-between px-4 bg-zulu-indigo/95 backdrop-blur-sm">
         <div className="flex-shrink-0">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-zulu-gold font-bold text-xl">ZuluFun.io</span>
+            <span className="text-zulu-gold font-bold text-xl">Azania<span className='text-xl font-normal'>Connect</span></span>
           </Link>
         </div>
         <button

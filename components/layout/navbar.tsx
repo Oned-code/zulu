@@ -67,8 +67,8 @@ export default function Navbar() {
               <Briefcase className="h-5 w-5" />
             </span>
             <span className="min-w-0">
-              <span className="block text-lg font-bold leading-tight text-black">ZuluFun.io</span>
-              <span className="hidden text-xs text-zinc-500 sm:block">Africa&apos;s autonomous business engine</span>
+              <span className="block text-lg font-bold leading-tight text-black">Azania<span className='text-lg font-normal'>Connect</span></span>
+              <span className="hidden text-xs text-zinc-500 sm:block">Africa's business engine</span>
             </span>
           </Link>
 

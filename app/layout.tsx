@@ -5,10 +5,10 @@ import Footer from '@/components/layout/footer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://zulufun.io'),
-  title: 'ZuluFun.io - Africa\'s Autonomous Business Engine',
+  title: 'ZuluFun.io - Africa\'s Business Engine',
   description: 'AI-powered business platform connecting African consumers with trusted providers. Get quotes, access business insights, and grow your business with ZuluFun.',
   openGraph: {
-    title: 'ZuluFun.io - Africa\'s Autonomous Business Engine',
+    title: 'ZuluFun.io - Africa\'s Business Engine',
     description: 'AI-powered business platform connecting African consumers with trusted providers. Get quotes, access business insights, and grow your business with ZuluFun.',
     url: 'https://zulufun.io',
     siteName: 'ZuluFun.io',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: 'https://zulufun.io/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'ZuluFun.io - Africa\'s Autonomous Business Engine',
+        alt: 'ZuluFun.io - Africa\'s Business Engine',
       },
     ],
     type: 'website',

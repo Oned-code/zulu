@@ -23,8 +23,8 @@ export default function AuthLayout({
                 <Briefcase className="h-6 w-6" />
               </span>
               <span>
-                <span className="block text-2xl font-bold leading-none">ZuluFun.io</span>
-                <span className="text-sm text-zulu-gold/65">Africa&apos;s autonomous business engine</span>
+                <span className="block text-2xl font-bold leading-none">Azania<span className='text-2xl font-normal'>Connect</span></span>
+                <span className="text-sm text-zulu-gold/65">Africa's business engine</span>
               </span>
             </Link>
           </div>
