@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Bell, Briefcase, Menu, Search, UserRound, X, LogOut } from 'lucide-react';
+import { Bell, Menu, Search, UserRound, X, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
@@ -63,9 +63,6 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="flex min-w-0 items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-black text-white">
-              <Briefcase className="h-5 w-5" />
-            </span>
             <span className="min-w-0">
               <span className="block text-lg font-bold leading-tight text-black">Azania<span className='text-lg font-normal'>Connect</span></span>
               <span className="hidden text-xs text-zinc-500 sm:block">Africa's business engine</span>

@@ -62,7 +62,7 @@ export default function MobileMenu() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-zulu-indigo/70 hover:bg-zulu-indigo/80 hover:text-zulu-gold transition-colors"
+                className="block px-3 py-2 rounded-md text-zulu-gold/70 hover:bg-zulu-indigo/80 hover:text-zulu-gold transition-colors"
               >
                 {item.label}
               </Link>
