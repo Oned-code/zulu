@@ -157,7 +157,7 @@ async function scrapeAndPopulate() {
         
         let count = 0;
         for (const item of parsedFeed.items) {
-          if (count >= 15) break;
+          if (count >= 100) break;
           
           const title = item.title || 'Untitled';
           const link = item.link || '';
@@ -222,27 +222,38 @@ async function scrapeAndPopulate() {
 
     console.log('Database population complete.');
 
-    // Delete the 10 oldest articles to maintain a lean database
-    const { data: oldArticles, error: fetchErr } = await supabase
+    // Cap total articles at 100 — delete oldest entries beyond the cap
+    const { count: totalCount, error: countErr } = await supabase
       .from('articles')
-      .select('id')
-      .order('published_at', { ascending: true })
-      .limit(10);
+      .select('*', { count: 'exact', head: true });
 
-    if (fetchErr) {
-      console.error('Error fetching old articles:', fetchErr);
-    } else if (oldArticles && oldArticles.length > 0) {
-      const idsToDelete = oldArticles.map(a => a.id);
-      const { error: deleteErr } = await supabase
+    if (countErr) {
+      console.error('Error counting articles:', countErr);
+    } else if (totalCount > 100) {
+      const excess = totalCount - 100;
+      const { data: oldArticles, error: fetchErr } = await supabase
         .from('articles')
-        .delete()
-        .in('id', idsToDelete);
-        
-      if (deleteErr) {
-        console.error('Error deleting old articles:', deleteErr);
-      } else {
-        console.log(`Successfully deleted ${idsToDelete.length} oldest articles to keep the database fresh.`);
+        .select('id')
+        .order('published_at', { ascending: true })
+        .limit(excess);
+
+      if (fetchErr) {
+        console.error('Error fetching old articles:', fetchErr);
+      } else if (oldArticles && oldArticles.length > 0) {
+        const idsToDelete = oldArticles.map(a => a.id);
+        const { error: deleteErr } = await supabase
+          .from('articles')
+          .delete()
+          .in('id', idsToDelete);
+
+        if (deleteErr) {
+          console.error('Error deleting old articles:', deleteErr);
+        } else {
+          console.log(`Capped database: deleted ${idsToDelete.length} oldest articles (kept 100).`);
+        }
       }
+    } else {
+      console.log(`Database has ${totalCount} articles (within 100 cap).`);
     }
 
   } catch (err) {
