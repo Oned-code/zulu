@@ -35,6 +35,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8892146158683290"
+     crossOrigin="anonymous"></script>
       <body className="font-sans antialiased bg-zulu-mist text-zulu-indigo">
         <Navbar />
         <main className="min-h-[calc(100vh-4rem)] bg-zulu-mist">
