@@ -4,6 +4,7 @@ import NewsletterCTA from '@/components/layout/newsletter-cta';
 import { TrendingBar } from '@/components/news/trending-bar';
 import { ArticleGrid } from '@/components/news/article-grid';
 import { SectionHeader } from '@/components/shared/section-header';
+import { SidebarArticles } from '@/components/news/sidebar-articles';
 import { getPublishedArticles } from '@/lib/data';
 
 const trendingTopics = [
@@ -86,32 +87,7 @@ export default async function HomePage() {
               )}
             </div>
 
-            <div className="space-y-3">
-              <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4">Latest Stories</h3>
-              {sidebarArticles.map((article) => (
-                <Link
-                  key={article.id}
-                  href={`/news/${article.category}/${article.slug}`}
-                  className="group flex items-center space-x-4 p-3 bg-white rounded-2xl border border-zinc-200/50 hover:border-zinc-300 hover:shadow-md transition-all duration-300"
-                >
-                  <div className="flex-shrink-0 h-16 w-16 rounded-lg overflow-hidden">
-                    <img
-                      src={article.featuredImage}
-                      alt={article.title}
-                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
-                      {article.category}
-                    </span>
-                    <h4 className="text-zulu-indigo text-sm font-semibold group-hover:text-zinc-600 transition-colors line-clamp-2 mt-0.5">
-                      {article.title}
-                    </h4>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <SidebarArticles articles={sidebarArticles} />
           </div>
         </div>
       </section>

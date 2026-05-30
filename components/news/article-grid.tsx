@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { Clock } from 'lucide-react';
 import type { Article } from '@/types/index';
@@ -7,6 +10,19 @@ interface ArticleGridProps {
   columns?: 2 | 3 | 4;
   showExcerpt?: boolean;
   showImage?: boolean;
+}
+
+function ArticleCardImage({ src, alt }: { src: string; alt: string }) {
+  const [hasError, setHasError] = useState(false);
+  if (!src || hasError) return null;
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      onError={() => setHasError(true)}
+    />
+  );
 }
 
 export function ArticleGrid({ articles, columns = 3, showExcerpt = false, showImage = false }: ArticleGridProps) {
@@ -25,12 +41,8 @@ export function ArticleGrid({ articles, columns = 3, showExcerpt = false, showIm
           className="group bg-white rounded-3xl border border-zinc-200/60 hover:border-zinc-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
         >
           {showImage && (
-            <div className="aspect-video overflow-hidden">
-              <img
-                src={article.featuredImage}
-                alt={article.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
+            <div className="aspect-video overflow-hidden bg-zinc-100">
+              <ArticleCardImage src={article.featuredImage} alt={article.title} />
             </div>
           )}
           <div className="p-5 space-y-3">

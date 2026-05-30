@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { Clock, User } from 'lucide-react';
 import type { Article } from '@/types/index';
@@ -7,17 +10,22 @@ interface FeaturedArticleProps {
 }
 
 export function FeaturedArticle({ article }: FeaturedArticleProps) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <Link
       href={`/news/${article.category}/${article.slug}`}
-      className="group relative block overflow-hidden rounded-2xl"
+      className="group relative block overflow-hidden rounded-2xl bg-zulu-indigo"
     >
       <div className="aspect-[16/9] overflow-hidden">
-        <img
-          src={article.featuredImage}
-          alt={article.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+        {article.featuredImage && !imgError && (
+          <img
+            src={article.featuredImage}
+            alt={article.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={() => setImgError(true)}
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-zulu-indigo via-zulu-indigo/50 to-transparent" />
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-8 space-y-3">

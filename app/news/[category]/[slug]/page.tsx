@@ -4,6 +4,7 @@ import NewsletterCTA from '@/components/layout/newsletter-cta';
 import { AdBanner } from '@/components/shared/ad-banner';
 import Breadcrumb from '@/components/layout/breadcrumb';
 import { getArticleBySlug, getPublishedArticles } from '@/lib/data';
+import { RelatedArticles } from '@/components/news/related-articles';
 
 export default async function ArticlePage({ params }: { params: Promise<{ category: string; slug: string }> }) {
   const { slug } = await params;
@@ -52,6 +53,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ catego
                   src={article.featuredImage}
                   alt={article.title}
                   className="w-full h-64 object-cover rounded-lg"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
               </div>
             )}
@@ -95,31 +97,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ catego
                   <span className="text-zulu-gold font-medium text-xs tracking-wider uppercase">Related</span>
                   <h2 className="text-2xl font-bold text-zulu-indigo mt-2">More on {article.category.charAt(0).toUpperCase() + article.category.slice(1)}</h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {relatedArticles.map((related) => (
-                    <Link
-                      key={related.id}
-                      href={`/news/${related.category}/${related.slug}`}
-                      className="group flex items-center space-x-4 p-4 bg-zulu-indigo/5 rounded-lg hover:bg-zulu-indigo/10 transition-colors"
-                    >
-                      <div className="flex-shrink-0 h-24 w-24 rounded-lg overflow-hidden">
-                        <img
-                          src={related.featuredImage}
-                          alt={related.title}
-                          className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="flex-1 space-y-2">
-                        <h3 className="text-zulu-indigo font-semibold text-lg group-hover:text-zulu-gold transition-colors line-clamp-2">
-                          {related.title}
-                        </h3>
-                        <p className="text-zulu-indigo/50 text-sm line-clamp-2">
-                          {related.excerpt}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                <RelatedArticles articles={relatedArticles} />
               </>
             )}
 
