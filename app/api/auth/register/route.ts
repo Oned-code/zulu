@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase-server';
+import { getResendClient } from '@/lib/resend';
+import { verificationEmailHtml } from '@/lib/email-templates';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,6 +15,8 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = await createServerSupabaseClient();
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://zulu-chi.vercel.app';
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -20,7 +24,7 @@ export async function POST(request: NextRequest) {
         data: {
           full_name: name,
         },
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/callback`,
+        emailRedirectTo: `${siteUrl}/auth/callback`,
       },
     });
 
@@ -29,6 +33,28 @@ export async function POST(request: NextRequest) {
         { error: error.message },
         { status: 400 }
       );
+    }
+
+    // Send a personalized welcome/verification email via Resend
+    // Supabase still sends its own confirmation email, but this adds a branded touch
+    const resend = getResendClient();
+    if (resend && data.user) {
+      try {
+        await resend.emails.send({
+          from: 'ZuluFun <onboarding@zulufun.io>',
+          to: [email],
+          subject: `Welcome to ZuluFun, ${name}! Verify your email`,
+          html: verificationEmailHtml({
+            name,
+            actionUrl: `${siteUrl}/auth/callback`,
+            siteName: 'ZuluFun',
+            siteUrl,
+          }),
+        });
+      } catch (emailError) {
+        console.error('Failed to send verification email via Resend:', emailError);
+        // Don't fail the request — Supabase's default email is still sent
+      }
     }
 
     return NextResponse.json({

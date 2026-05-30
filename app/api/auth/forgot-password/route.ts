@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase-server';
+import { getResendClient } from '@/lib/resend';
+import { passwordResetEmailHtml } from '@/lib/email-templates';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,8 +15,47 @@ export async function POST(request: NextRequest) {
     }
 
     const supabase = await createServerSupabaseClient();
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://zulu-chi.vercel.app';
+
+    // Look up the user's name from profiles
+    let userName = 'there';
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('full_name')
+        .eq('email', email)
+        .single();
+      if (profile?.full_name) {
+        userName = profile.full_name;
+      }
+    } catch {
+      // Profile not found — use default greeting
+    }
+
+    // Supabase sends its own reset email, but we send a branded one via Resend too
+    const resend = getResendClient();
+    if (resend) {
+      try {
+        const resetUrl = `${siteUrl}/auth/reset-password`;
+        await resend.emails.send({
+          from: 'ZuluFun <onboarding@zulufun.io>',
+          to: [email],
+          subject: 'Reset your ZuluFun password',
+          html: passwordResetEmailHtml({
+            name: userName,
+            actionUrl: resetUrl,
+            siteName: 'ZuluFun',
+            siteUrl,
+          }),
+        });
+      } catch (emailError) {
+        console.error('Failed to send reset email via Resend:', emailError);
+      }
+    }
+
+    // Still call Supabase to trigger their reset flow as fallback
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/auth/reset-password`,
+      redirectTo: `${siteUrl}/auth/reset-password`,
     });
 
     if (error) {
